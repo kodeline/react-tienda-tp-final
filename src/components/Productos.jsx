@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+// Se pide para la pre-entrega
 const Productos = ({ agregarProducto }) => {
   
   const [productos, setProductos] = useState([]);
@@ -20,7 +20,7 @@ const Productos = ({ agregarProducto }) => {
         setError('Error al cargar productos');
         setCargando(false);
       });
-  }, []);
+  },[]);
 
   if (cargando) return 'Cargando productos...';
   if (error) return error;

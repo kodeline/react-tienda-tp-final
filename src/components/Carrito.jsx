@@ -1,5 +1,5 @@
+// Se pide para la pre-entrega
 const Carrito = ({ productosEnCarrito, productosEliminados }) => {
-  
   return (
     <div>
       <h2>Carrito</h2>

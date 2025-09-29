@@ -1,9 +1,9 @@
-import NavBar from "./NavBar";
-import styles from "./Header.module.css";
-import UserIcon from "../assets/UserIcon";
-import BagIcon from "../assets/BagIcon";
-
-const Header = ({cartItemCount = 10}) => {
+import NavBar from './Navbar';
+import styles from './Header.module.css';
+import UserIcon from '../assets/UserIcon';
+import BagIcon from '../assets/BagIcon';
+// Se pide para la pre-entrega
+const Header = ({contadorEnCarrito = 5}) => {
   return (
     <header className={styles.header}>
       {/* Seccion Izquierda: Logo */}
@@ -17,16 +17,16 @@ const Header = ({cartItemCount = 10}) => {
       {/* Seccion Derecha: Iconos */}
       <div className={styles.iconsContainer}>
         {/* Icono de Usuario */}
-        <div className={styles.icon}>
+        <div className={styles.icono}>
           <UserIcon />
         </div>
         {/* Icono de Carrito con Contador */}
-        <div className={styles.cartIconWrapper}>
-          <BagIcon className={styles.icon} />
+        <div className={styles.iconoDeCarrito}>
+          <BagIcon className={styles.icono} />
           {/* Renderiza el contador solo si es mayor que 0 */}
-          {cartItemCount > 0 && (
-            <span className={styles.cartCounter}>
-              {cartItemCount}
+          {contadorEnCarrito > 0 && (
+            <span className={styles.contadorDeCarrito}>
+              {contadorEnCarrito}
             </span>
           )}
         </div>

@@ -1,3 +1,4 @@
+// No se pide para la pre-entrega
 import { useState } from 'react';
 
 const Formulario = () => {

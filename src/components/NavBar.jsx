@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from './NavBar.module.css'; 
-
+// Se pide para la pre-entrega
 const NavBar = () => {
   return(
     <nav>
