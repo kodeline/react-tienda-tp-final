@@ -7,7 +7,7 @@ const Inicio = () => {
   // Usamos el spread operator (...) para copiar el array existente 
   // y añadir el nuevo producto.
   const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
+    setCarrito([...carrito, producto]);   
   };
   // Usamos filter() para crear un nuevo array que excluye el elemento con el índice dado.
   const eliminarDelCarrito = (indiceAEliminar) => {

@@ -19,7 +19,7 @@ const Productos = ({ agregarProducto }) => {
       .catch((error) => {
         setError('Error al cargar productos');
         setCargando(false);
-      });
+      })
   },[]);
 
   if (cargando) return 'Cargando productos...';
