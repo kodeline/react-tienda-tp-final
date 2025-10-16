@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from './NavBar.module.css'; 
+import styles from './Navbar.module.css'; 
 // Se pide para la pre-entrega
-const NavBar = () => {
+const Navbar = () => {
   return(
     <nav>
       <ul className={styles.lista}>
@@ -16,4 +16,4 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+export default Navbar;

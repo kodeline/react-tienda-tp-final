@@ -1,4 +1,4 @@
-import NavBar from './Navbar';
+import Navbar from './Navbar';
 import styles from './Header.module.css';
 import UserIcon from '../assets/UserIcon';
 import BagIcon from '../assets/BagIcon';
@@ -13,7 +13,7 @@ const Header = ({contadorEnCarrito = 5}) => {
       </div>
       {/* Seccion Central: Componente NavBar */}
       <div className={styles.navbarContainer}>
-        <NavBar/>
+        <Navbar/>
       </div>
       {/* Seccion Derecha: Iconos */}
       <div className={styles.iconsContainer}>
