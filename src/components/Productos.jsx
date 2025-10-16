@@ -1,11 +1,16 @@
+import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { CarritoContext } from '../context/CarritoContext';
 // Se pide para la pre-entrega
 const Productos = ({ agregarProducto }) => {
   
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+
+  // Usar el contexto 
+  const { agregarAlCarrito } = useContext(CarritoContext);
 
   const URL = 'https://fakestoreapi.com/products';
 
@@ -33,7 +38,7 @@ const Productos = ({ agregarProducto }) => {
           <li key={producto.id}>
             {producto.title} : {producto.price}$
             <img src={producto.image} height={80} width={80}/>
-            <button onClick={() => agregarProducto(producto)}>Agregar</button>
+            <button onClick={() => agregarAlCarrito(producto)}>Agregar</button>
             <Link to={`/productos/${producto.id}`} >Detalles</Link>
           </li>
         ))}
