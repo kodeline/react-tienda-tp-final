@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CarritoContext } from '../context/CarritoContext';
 // Se pide para la pre-entrega
-const Productos = ({ agregarProducto }) => {
+const Productos = () => {
   
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -17,14 +17,9 @@ const Productos = ({ agregarProducto }) => {
   useEffect(() => {
     fetch(URL)
       .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        setProductos(datos);
-        setCargando(false);
-      })
-      .catch((error) => {
-        setError('Error al cargar productos');
-        setCargando(false);
-      })
+      .then((datos) => setProductos(datos))
+      .catch((error) => setError('Error al cargar productos'))
+      .finally(() => setCargando(false))
   },[]);
 
   if (cargando) return 'Cargando productos...';

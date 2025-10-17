@@ -13,7 +13,7 @@ const Header = ({contadorEnCarrito = 5}) => {
       </div>
       {/* Seccion Central: Componente NavBar */}
       <div className={styles.navbarContainer}>
-        <Navbar/>
+        <Navbar />
       </div>
       {/* Seccion Derecha: Iconos */}
       <div className={styles.iconsContainer}>
