@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Carrito from "./components/Carrito";
 import Header from "./components/Header";
 import Inicio from "./pages/Inicio";
@@ -12,37 +11,33 @@ import Tecnologia from "./pages/Tecnologia";
 import Login from "./pages/Login";
 
 function App() {
-  const [estaAutenticado, setEstaAutenticado] = useState(true);
-  // Renderizado y Estructura
-
   return (
     <>
       <Header />
-
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/moda" element={<Moda />} />
-        <Route path="/tecnologia" element={<Tecnologia />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/productos/:id" element={<ProductoDetalle />} />
-        {/* No se pide para la pre-entrega */}
-        <Route
-          path="/carrito"
-          element={
-            <RutaProtegida estaAutenticado={estaAutenticado}>
-              <Carrito />
-            </RutaProtegida>
-          }
-        />
-        {/* No se pide para la pre-entrega */}
-        <Route
-          path="/admin"
-          element={
-            <RutaProtegida estaAutenticado={estaAutenticado}>
-              <Admin />
-            </RutaProtegida>
-          }
-        />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/moda" element={<Moda />} />
+          <Route path="/tecnologia" element={<Tecnologia />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/productos/:id" element={<ProductoDetalle />} />
+          {/* No se pide para la pre-entrega */}
+          <Route
+            path="/carrito"
+            element={
+              <RutaProtegida >
+                <Carrito />
+              </RutaProtegida>
+            }
+          />
+          {/* No se pide para la pre-entrega */}
+          <Route
+            path="/admin"
+            element={
+              <RutaProtegida >
+                <Admin />
+              </RutaProtegida>
+            }
+          />
       </Routes>
       <Footer />
     </>
