@@ -25,12 +25,15 @@ const Login = () => {
       <form onSubmit={manejarSubmit}>
         <h3>Iniciar Sesion</h3>
         <label htmlFor=''>Usuario</label>
+        <br/>
         <input 
           type='text'
           value={usuario}
           onChange={(evento) => setUsuario(evento.target.value)}
         />
+        <br/>
         <label htmlFor=''>Contraseña</label>
+        <br/>
         <input 
           type='text'
           value={contrasenia}

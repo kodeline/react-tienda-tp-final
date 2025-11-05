@@ -1,19 +1,22 @@
+import { useContext } from 'react';
 import Navbar from './Navbar';
 import styles from './Header.module.css';
 import BagIcon from '../assets/BagIcon';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import { CarritoContext } from '../context/CarritoContext';
 
-// Se pide para la pre-entrega
-const Header = ({contadorEnCarrito = 5}) => {
+const Header = () => {
+  const { carrito } = useContext(CarritoContext);
   const {usuario, logout} = useAuthContext();
   const estaLogeado = !!usuario;
+  const contadorEnCarrito = carrito.length;
 
   return (
     <header className={styles.header}>
       {/* Seccion Izquierda: Logo */}
       <div className={styles.logo}>
-        ONEPIECE
+        ONE PIECE
       </div>
       {/* Seccion Central: Componente NavBar */}
       <div className={styles.navbarContainer}>
@@ -28,8 +31,6 @@ const Header = ({contadorEnCarrito = 5}) => {
             <button className={styles.login}>Ingresá</button>
           </Link>
         }
-        
-        {/* Icono de Carrito con Contador */}
         <div className={styles.iconoDeCarrito}>
           <Link to="/carrito">
           <BagIcon className={styles.icono} />
@@ -40,7 +41,6 @@ const Header = ({contadorEnCarrito = 5}) => {
             </span>
           )}
           </Link>
-          
         </div>
       </div>
     </header>   

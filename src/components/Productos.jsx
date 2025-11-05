@@ -12,7 +12,7 @@ const Productos = () => {
   // Usar el contexto 
   const { agregarAlCarrito } = useContext(CarritoContext);
 
-  const URL = 'https://fakestoreapi.com/products';
+  const URL = 'https://68d5d31de29051d1c0afa93e.mockapi.io/productos';
 
   useEffect(() => {
     fetch(URL)
@@ -31,8 +31,8 @@ const Productos = () => {
       <ul>
         {productos.map((producto) => (
           <li key={producto.id}>
-            {producto.title} : {producto.price}$
-            <img src={producto.image} height={80} width={80}/>
+            {producto.nombre} : {producto.precio}$
+            <img src={producto.imagen} height={80} width={80}/>
             <button onClick={() => agregarAlCarrito(producto)}>Agregar</button>
             <Link to={`/productos/${producto.id}`} >Detalles</Link>
           </li>

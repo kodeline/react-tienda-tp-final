@@ -7,7 +7,7 @@ const ProductoDetalle = () => {
   const [producto, setProducto] = useState(null);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
+    fetch(`https://68d5d31de29051d1c0afa93e.mockapi.io/productos/${id}`)
       .then(respuesta => respuesta.json())
       .then(dato => setProducto(dato));
   },[id]);
@@ -18,9 +18,9 @@ const ProductoDetalle = () => {
   return(
     <>
       <h2>Detalles del Producto Nro {id}</h2>
-      <img src={producto.image} alt={producto.title} width={100} height={100} />
-      <h3>{producto.title}</h3>
-      <p>{producto.description}</p>
+      <img src={producto.imagen} alt={producto.nombre} width={100} height={100} />
+      <h3>{producto.nombre}</h3>
+      <p>{producto.descripcion}</p>
     </>
     
   );

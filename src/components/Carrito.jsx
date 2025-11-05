@@ -10,8 +10,8 @@ const Carrito = () => {
       <h2>Carrito</h2>
       {carrito.map((producto, indice) => (
         <div key={indice}>
-          <img src={producto.image} alt={producto.title} height={80} width={80} />
-          <p> {producto.title} : {producto.price}$ </p>
+          <img src={producto.imagen} alt={producto.nombre} height={80} width={80} />
+          <p> {producto.nombre} : {producto.precio}$ </p>
           <button onClick={() => eliminarDelCarrito(indice)}>Eliminar</button>
         </div>
       ))}
