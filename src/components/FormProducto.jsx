@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ProductoContext } from '../context/ProductoContext'; 
 
 const FormProducto = ({onAgregar}) => {
-
+  //const { agregarProducto, editarProducto } = useContext(ProductoContext); 
   const [errores, setErrores] = useState({});
   const [producto, setProducto] = useState({
     nombre: '',
