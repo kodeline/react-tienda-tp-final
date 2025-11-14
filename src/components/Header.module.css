@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400..700&family=Pirata+One&display=swap');
+
 .header {
   display: flex;
   justify-content: space-between; 
@@ -7,10 +9,10 @@
 }
 
 .logo {
-  flex-basis: 20%; 
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
   color: #333;
+  font-family: "Pirata One", system-ui;
 }
 
 .navbarContainer {

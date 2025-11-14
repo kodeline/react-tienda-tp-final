@@ -1,109 +1,142 @@
-import { useState, useContext } from "react";
-import { ProductoContext } from '../context/ProductoContext'; 
+import { useState } from "react";
+import { useProductosContext } from "../context/ProductosContext";
+import styles from "./FormProducto.module.css";
+import X from "../assets/X";
 
-const FormProducto = ({onAgregar}) => {
-  //const { agregarProducto, editarProducto } = useContext(ProductoContext); 
-  const [errores, setErrores] = useState({});
-  const [producto, setProducto] = useState({
-    nombre: '',
-    precio: '',
-    imagen: '',
-    descripcion: ''
-  });
+const FormProducto = ({ productoInicial = {}, modo = "agregar", onCerrar }) => {
   
+  const [producto, setProducto] = useState(productoInicial);
+  const { agregarProducto, editarProducto } = useProductosContext();
+
   const manejarChange = (evento) => {
-    const {name, value} =  evento.target;
-    setProducto({...producto, [name]: value});
+    const { name, value } = evento.target;
+    setProducto({ ...producto, [name]: value });
   };
 
-  const validarForm = () => {
-    const nuevosErrores = {};
-
-    if(!producto.nombre.trim())
-      nuevosErrores.nombre = 'El nombre es obligatorio.'
-
-    if(!producto.precio || producto.precio < 0)
-      nuevosErrores.precio = 'El precio debe ser mayor a 0.'
-
-    if (!producto.imagen.trim() || producto.imagen.length < 6)  
-      nuevosErrores.imagen = 'Debes subir la URL de una imagen valida.'; 
-
-    if (!producto.descripcion.trim() || producto.descripcion.length < 10)  
-      nuevosErrores.descripcion = 'La descripción debe tener al menos 10 caracteres.';  
- 
-    setErrores(nuevosErrores); 
-    return Object.keys(nuevosErrores).length === 0; 
-  }; 
-
-  const manejarSubmit = (evento) => {
+  const manejarSubmit = async (evento) => {
     evento.preventDefault();
-  
-    if (!validarForm())
-      return; 
-    
-    const productoAEnviar = {
-      ...producto,
-      precio: parseFloat(producto.precio) 
-    };
-    
-    onAgregar(productoAEnviar);
-    // Limpiamos el formulario
-    setProducto({nombre: '', precio:'', imagen:'', descripcion:''});
-    setErrores({});
-  }
- 
-  return(
-    <>
-      <form onSubmit={manejarSubmit}>
-        <h2>Agregar Producto</h2>
-        <div>
-          <label>Nombre:</label>
-          <br/>
-          <input
-            type='text'
-            name='nombre'
-            value={producto.nombre}
-            onChange={manejarChange}    
-          />
-          {errores.nombre && <p style={{ color: 'red' }}>{errores.nombre}</p>} 
+    if (modo === "agregar") {
+      await agregarProducto(producto);
+    } else {
+      await editarProducto(producto);
+    }
+    onCerrar();
+  };
+
+  return (
+    <div 
+      className={styles.modalOverlay}
+      aria-modal="true"
+      role="dialog"
+    >
+      <div className={styles.modalContainer}>
+        {/* Contenido del Modal */}
+        <div className={styles.modalContent}>   
+          {/* Encabezado del Modal */}
+          <div className={styles.modalHeader}>
+            <h3 className={styles.modalHeaderTitle}>
+              {modo === "agregar" ? "Agregar Producto" : "Editar Producto"}
+            </h3>
+            <button 
+              type="button" 
+              onClick={onCerrar}
+              className={styles.closeButton}
+            >
+              <X />
+            </button>
+          </div>
+          {/* Cuerpo del Modal */}
+          <form onSubmit={manejarSubmit}>
+            <div className={styles.formGrid}>
+              {/* Campo Nombre */}
+              <div className={styles.colSpan2}>
+                <label className={styles.formLabel}>
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  name="nombre"
+                  id="nombre"
+                  className={styles.formInputBase}
+                  placeholder="Ingrese el nombre del producto"
+                  value={producto.nombre || ""}
+                  onChange={manejarChange}
+                  required
+                />
+              </div>
+              {/* Campo Precio */}
+              <div className={`${styles.colSpan2} ${styles.smColSpan1}`}>
+                <label className={styles.formLabel}>
+                  Precio
+                </label>
+                <input
+                  type="number"
+                  name="precio"
+                  id="precio"
+                  className={styles.formInputBase}
+                  placeholder="$0.00"
+                  value={producto.precio || ""}
+                  onChange={manejarChange}
+                  required
+                  min="0"
+                  step="any"
+                />
+              </div>
+              
+              {/* Campo URL de Imagen */}
+              <div className={`${styles.colSpan2} ${styles.smColSpan1}`}>
+                <label className={styles.formLabel}>
+                  URL de Imagen
+                </label>
+                <input
+                  type="text"
+                  name="imagen"
+                  id="imagen"
+                  className={styles.formInputBase}
+                  placeholder="https://ejemplo.com/imagen.jpg"
+                  value={producto.imagen || ""}
+                  onChange={manejarChange}
+                />
+              </div>
+              {/* Campo Descripcion */}
+              <div className={styles.colSpan2}>
+                <label className={styles.formLabel}>
+                  Descripción del Producto
+                </label>
+                <textarea
+                  id="descripcion"
+                  name="descripcion"
+                  rows="4"
+                  className={styles.formInputBase}
+                  placeholder="Escriba la descripción del producto aquí"
+                  value={producto.descripcion || ""}
+                  onChange={manejarChange}
+                  required
+                ></textarea>
+              </div>
+            </div>
+            {/* Botones de Accion */}
+            <div className={styles.modalActions}>
+              {/* Boton Primario */}
+              <button 
+                type="submit" 
+                className={`${styles.btnBase} ${styles.btnPrimary}`}
+              >
+                {modo === "agregar" ? <>Agregar</> : <>Actualizar</>}
+              </button>
+              {/* Boton Secundario o de cancelar */}
+              <button 
+                type="button" 
+                onClick={onCerrar}
+                className={`${styles.btnBase} ${styles.btnSecondary}`}
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Precio:</label>
-          <br/>
-          <input
-            type='number'
-            name='precio'
-            value={producto.precio}
-            onChange={manejarChange}
-            min={0}
-            step='any'
-          />
-          {errores.precio && <p style={{ color: 'red' }}>{errores.precio}</p>} 
-        </div>
-        <div>
-          <label>URL de Imagen:</label>
-          <br/>
-          <input
-            type='text'
-            name='imagen'
-            value={producto.imagen}
-            onChange={manejarChange}    
-          />
-          {errores.imagen && <p style={{ color: 'red' }}>{errores.imagen}</p>} 
-        </div>
-        <div>
-          <label>Descripcion:</label>
-          <br/>
-          <textarea
-            name='descripcion'
-            value={producto.descripcion}
-            onChange={manejarChange}
-          />
-          {errores.descripcion && <p style={{ color: 'red' }}>{errores.descripcion}</p>} 
-        </div>
-        <button type='submit'>Agregar Productos</button>  
-      </form>   
-    </>
+      </div>
+    </div>
   );
 }
 

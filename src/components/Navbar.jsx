@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css'; 
 import { useAuthContext } from '../context/AuthContext';
-// Se pide para la pre-entrega
+
 const Navbar = () => {
   const { usuario } = useAuthContext();
   const esAdmin = usuario === 'admin';

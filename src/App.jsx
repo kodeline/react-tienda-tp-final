@@ -5,7 +5,7 @@ import Moda from "./pages/Moda";
 import { Routes, Route } from "react-router-dom";
 import ProductoDetalle from "./pages/ProductoDetalle";
 import RutaProtegida from "./components/RutaProtegida";
-import Admin from "./components/Admin";
+import Admin from "./pages/Admin";
 import Footer from "./components/Footer";
 import Tecnologia from "./pages/Tecnologia";
 import Login from "./pages/Login";
