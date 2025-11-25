@@ -1,21 +1,32 @@
 import { Link } from 'react-router-dom';
-import styles from './Navbar.module.css'; 
-import { useAuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
-  const { usuario } = useAuthContext();
-  const esAdmin = usuario === 'admin';
-  
-  return(
+  return (
     <nav>
-      <ul className={styles.lista}>
-        <li className={styles.item}>
-          <Link to="/" className={styles.link}>Inicio</Link>
-          <Link to="/tecnologia" className={styles.link}>Tecnologia</Link>
-          <Link to="/moda" className={styles.link}>Moda</Link>
-          {esAdmin && 
-            <Link to="/admin" className={styles.link}>Admin</Link>
-          }
+      <ul className="flex md:flex-row flex-col md:gap-10 gap-8 items-center md:items-center">
+        <li>
+          <Link 
+            to="/tecnologia" 
+            className="text-gray-700 md:text-lg text-2xl font-medium hover:text-black transition-colors duration-200 hover:underline underline-offset-4"
+          >
+            Hombre
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/moda" 
+            className="text-gray-700 md:text-lg text-2xl font-medium hover:text-black transition-colors duration-200 hover:underline underline-offset-4"
+          >
+            Mujer
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/moda" 
+            className="text-gray-700 md:text-lg text-2xl font-medium hover:text-black transition-colors duration-200 hover:underline underline-offset-4"
+          >
+            Infantil
+          </Link>
         </li>
       </ul>
     </nav>
@@ -23,4 +34,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-

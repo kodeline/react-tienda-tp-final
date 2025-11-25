@@ -12,35 +12,36 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <>
+    <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
       <Header />
-        <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/moda" element={<Moda />} />
-          <Route path="/tecnologia" element={<Tecnologia />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/productos/:id" element={<ProductoDetalle />} />
-          {/* No se pide para la pre-entrega */}
-          <Route
-            path="/carrito"
-            element={
-              <RutaProtegida >
-                <Carrito />
-              </RutaProtegida>
-            }
-          />
-          {/* No se pide para la pre-entrega */}
-          <Route
-            path="/admin"
-            element={
-              <RutaProtegida >
-                <Admin />
-              </RutaProtegida>
-            }
-          />
+
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+        <Route path="/moda" element={<Moda />} />
+        <Route path="/tecnologia" element={<Tecnologia />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/productos/:id" element={<ProductoDetalle />} />
+        {/* No se pide para la pre-entrega */}
+        <Route
+          path="/carrito"
+          element={
+            <RutaProtegida>
+              <Carrito />
+            </RutaProtegida>
+          }
+        />
+        {/* No se pide para la pre-entrega */}
+        <Route
+          path="/admin"
+          element={
+            <RutaProtegida>
+              <Admin />
+            </RutaProtegida>
+          }
+        />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
