@@ -5,16 +5,19 @@ import { CarritoProvider } from "./context/CarritoContext";
 import App from "./App";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext";
-import { ProductosProvider } from './context/ProductosContext'; 
+import { ProductosProvider } from './context/ProductosContext';
+import { SearchProvider } from "./context/BusquedaContext"; 
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <ProductosProvider>
-          <CarritoProvider>
-            <App />
-          </CarritoProvider>
+          <SearchProvider>
+            <CarritoProvider>
+              <App />
+            </CarritoProvider>
+          </SearchProvider>
         </ProductosProvider>
       </AuthProvider>
     </BrowserRouter>

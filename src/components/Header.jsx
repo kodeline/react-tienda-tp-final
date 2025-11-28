@@ -5,6 +5,7 @@ import X from '../assets/X';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 import { CarritoContext } from '../context/CarritoContext';
+import BarraBusqueda from "../components/BarraBusqueda";
 
 const Header = () => {
   const { carrito } = useContext(CarritoContext);
@@ -50,9 +51,11 @@ const Header = () => {
         <div className="hidden md:block">
           <Navbar />
         </div>
-
         {/* Seccion Derecha: Iconos */}
         <div className="flex items-center gap-3 md:gap-4">
+          {/* Barra de Busqueda */}
+          <BarraBusqueda />
+          {/* Verifica si alguien esta logeado */}
           {estaLogeado ? (
             <>
               {/* Si es admin, hacer el nombre clickeable, si no, solo texto */}

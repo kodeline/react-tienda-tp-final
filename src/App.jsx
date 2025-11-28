@@ -9,17 +9,18 @@ import Admin from "./pages/Admin";
 import Footer from "./components/Footer";
 import Tecnologia from "./pages/Tecnologia";
 import Login from "./pages/Login";
+import ResultadosBusqueda from "./components/ResultadosBusqueda";
 
 function App() {
   return (
     <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
       <Header />
-
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/moda" element={<Moda />} />
         <Route path="/tecnologia" element={<Tecnologia />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/busqueda" element={<ResultadosBusqueda />} />
         <Route path="/productos/:id" element={<ProductoDetalle />} />
         {/* No se pide para la pre-entrega */}
         <Route

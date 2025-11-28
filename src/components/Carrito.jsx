@@ -1,9 +1,6 @@
 import { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import TrashIcon from "../assets/TrashIcon";
-import BagIcon from "../assets/BagIcon";
-
-
 
 const Carrito = () => {
   const { carrito, eliminarDelCarrito, actualizarCantidad } = useContext(CarritoContext);
@@ -11,25 +8,30 @@ const Carrito = () => {
   // Calcular subtotal
   const subtotal = carrito.reduce((acc, producto) => {
     const cantidad = producto.cantidad || 1;
-    return acc + (producto.precio * cantidad);
+    return acc + producto.precio * cantidad;
   }, 0);
-  
+
   const envio = 0;
   // Total
   const total = subtotal + envio;
-  
-  const handleCantidad = (indice, operacion) => {
+
+  const manejarCantidad = (indice, operacion) => {
     const producto = carrito[indice];
-    const cantidadActual = producto.cantidad || 1;
-    
-    if (operacion === 'incrementar') {
-      actualizarCantidad(indice, cantidadActual + 1);
-    } else if (operacion === 'decrementar') {
-      if (cantidadActual === 1) {
-        eliminarDelCarrito(indice);
-      } else {
-        actualizarCantidad(indice, cantidadActual - 1);
-      }
+    const cantidadActual = producto.cantidad;
+    // Definimos cuánto cambia cada operación
+    const cambios = {
+      incrementar: 1,
+      decrementar: -1,
+    };
+
+    // Calculamos la nueva cantidad
+    const nuevaCantidad = cantidadActual + cambios[operacion];
+
+    // Si la cantidad llega a 0 o menos, eliminamos el producto
+    if (nuevaCantidad < 1) {
+      eliminarDelCarrito(indice);
+    } else {
+      actualizarCantidad(indice, nuevaCantidad);
     }
   };
   
@@ -92,7 +94,7 @@ const Carrito = () => {
                         <span className="text-sm font-medium text-gray-700">Cantidad:</span>
                         <div className="flex items-center border border-gray-300 rounded-md">
                           <button 
-                            onClick={() => handleCantidad(indice, 'decrementar')}
+                            onClick={() => manejarCantidad(indice, 'decrementar')}
                             className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors duration-150 font-semibold"
                           >
                             −
@@ -101,7 +103,7 @@ const Carrito = () => {
                             {cantidad}
                           </span>
                           <button 
-                            onClick={() => handleCantidad(indice, 'incrementar')}
+                            onClick={() => manejarCantidad(indice, 'incrementar')}
                             className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors duration-150 font-semibold"
                           >
                             +
@@ -125,7 +127,7 @@ const Carrito = () => {
                         {/* Boton de Eliminar */}
                         <button 
                           onClick={() => eliminarDelCarrito(indice)}
-                          className="p-2 hover:bg-red-50 rounded-md transition-colors duration-150"
+                          className="p-2 hover:text-red-600 rounded-md transition-colors duration-150"
                           aria-label="Eliminar producto"
                         >
                           <TrashIcon />
